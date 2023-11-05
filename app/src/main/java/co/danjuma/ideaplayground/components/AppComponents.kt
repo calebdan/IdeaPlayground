@@ -23,7 +23,7 @@ import androidx.navigation.compose.rememberNavController
 
 
 @Composable
-fun ButtonComponent(value: String, navController: NavController? = null, onClick: () -> Unit) {
+fun ButtonComponent(value: String, navController: NavController, onClick: () -> Unit) {
     Button(
         modifier = Modifier
             .fillMaxWidth()
@@ -39,12 +39,9 @@ fun ButtonComponent(value: String, navController: NavController? = null, onClick
 
         ),
         onClick = {
-            if (navController != null) {
-                navController.navigate("MainActivityScreen")
-            } else {
-                // Otherwise, simply call the onClick listener
+
                 onClick()
-            }
+
         }) {
 
         Text(
