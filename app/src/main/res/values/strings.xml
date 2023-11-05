@@ -4,4 +4,5 @@
     <string name="tip_calculator">Tip Calculator</string>
     <string name="tip_calculator_screen">Tip Calculator Screen</string>
     <string name="new_screen_header">New Screen Header</string>
+    <string name="purchase_amount">Input purchase amount</string>
 </resources>

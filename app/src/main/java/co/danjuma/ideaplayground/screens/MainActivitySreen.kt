@@ -42,7 +42,7 @@ fun MainActivityScreen(navController: NavHostController) {
 
             Spacer(modifier = Modifier.height(20.dp))
 
-            Divider(thickness = 5.dp, color = Color.Black,)
+            Divider(thickness = 5.dp, color = Color.Black)
 
             Spacer(modifier = Modifier.height(20.dp))
 
