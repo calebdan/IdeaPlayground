@@ -39,9 +39,11 @@ fun ButtonComponent(
 
     value: String,
     navController: NavController,
-    onClick: () -> Unit
+    onClick: () -> Unit,
+
 ) {
     Button(
+
         modifier = Modifier
             .fillMaxWidth()
             .border(

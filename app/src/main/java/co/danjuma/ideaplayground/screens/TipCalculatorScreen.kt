@@ -3,12 +3,12 @@ package co.danjuma.ideaplayground.screens
 import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
+
 import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
-import androidx.compose.foundation.layout.wrapContentHeight
 import androidx.compose.material3.Surface
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
@@ -27,15 +27,16 @@ import co.danjuma.ideaplayground.components.TextFieldComponent
 
 @Composable
 fun TipCalculatorScreen(navController: NavHostController) {
-    Surface(
+    Box(
         modifier = Modifier
             .fillMaxSize()
+            .padding(30.dp)
+            .background(Color.White),
+        contentAlignment = Alignment.BottomCenter
     ) {
         Column(
             modifier = Modifier
                 .fillMaxSize()
-                .padding(30.dp)
-                .background(Color.White)
         ) {
 
             Text(text = "Tip Calculator Screen", fontSize = 30.sp)
@@ -47,8 +48,9 @@ fun TipCalculatorScreen(navController: NavHostController) {
             Spacer(modifier = Modifier.height(15.dp))
 
 
+        }
 
-
+        Box(modifier = Modifier.fillMaxWidth(), contentAlignment = Alignment.BottomCenter) {
             ButtonComponent(
 
                 value = stringResource(id = R.string.tip_calculator_screen),
@@ -56,13 +58,6 @@ fun TipCalculatorScreen(navController: NavHostController) {
                     navController.navigate("NewScreen")
                 }
             )
-
-
-
-
-            Spacer(modifier = Modifier.height(15.dp))
-
-
         }
     }
 

@@ -28,7 +28,7 @@ fun MainActivityScreen(navController: NavHostController) {
             .fillMaxSize()
             .background(Color.White)
             .padding(20.dp),
-        contentAlignment = Alignment.Center
+        contentAlignment = Alignment.BottomCenter
     ) {
 
         Column(modifier = Modifier.fillMaxSize()) {
@@ -46,12 +46,18 @@ fun MainActivityScreen(navController: NavHostController) {
 
             Spacer(modifier = Modifier.height(20.dp))
 
-            ButtonComponent(
-                value = stringResource(id = R.string.tip_calculator),
-                navController = navController, onClick = {
-                    navController.navigate("TipCalculatorScreen")
-                }
-            )
+
+
         }
+
+
+
+
+        ButtonComponent(
+            value = stringResource(id = R.string.tip_calculator),
+            navController = navController, onClick = {
+                navController.navigate("TipCalculatorScreen")
+            }
+        )
     }
 }
