@@ -5,7 +5,9 @@ import androidx.compose.foundation.border
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
+import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
+import androidx.compose.foundation.layout.width
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.foundation.text.KeyboardOptions
 import androidx.compose.material3.Button
@@ -13,8 +15,6 @@ import androidx.compose.material3.ButtonDefaults
 import androidx.compose.material3.ExperimentalMaterial3Api
 import androidx.compose.material3.Text
 import androidx.compose.material3.TextField
-import androidx.compose.material3.TextFieldColors
-import androidx.compose.material3.TextFieldDefaults
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
@@ -41,7 +41,7 @@ fun ButtonComponent(
     navController: NavController,
     onClick: () -> Unit,
 
-) {
+    ) {
     Button(
 
         modifier = Modifier
@@ -50,7 +50,8 @@ fun ButtonComponent(
                 1.dp, color = Color.Blue,
                 shape = RectangleShape
             )
-            .padding(horizontal = 5.dp, vertical = 2.dp),
+            .padding(horizontal = 5.dp, vertical = 2.dp)
+           ,
         shape = RoundedCornerShape(10),
         colors = ButtonDefaults.buttonColors(
             containerColor = Color.Blue,
@@ -62,7 +63,7 @@ fun ButtonComponent(
         }) {
 
         Text(
-            text = value, fontSize = 20.sp, fontWeight = FontWeight.Normal,
+            text = value, fontSize = 15.sp, fontWeight = FontWeight.Normal,
             textAlign = TextAlign.Center
         )
 
@@ -72,7 +73,7 @@ fun ButtonComponent(
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
 fun TextFieldComponent(value: String) {
-    var textValue = remember { mutableStateOf("") }
+    var textValue = remember { mutableStateOf(value) }
 
     TextField(
 

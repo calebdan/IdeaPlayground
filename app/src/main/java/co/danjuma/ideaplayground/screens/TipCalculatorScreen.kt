@@ -1,6 +1,7 @@
 package co.danjuma.ideaplayground.screens
 
 import androidx.compose.foundation.background
+import androidx.compose.foundation.gestures.detectTapGestures
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
 
@@ -12,21 +13,24 @@ import androidx.compose.foundation.layout.padding
 import androidx.compose.material3.Surface
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.currentCompositionLocalContext
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
+import androidx.compose.ui.input.pointer.pointerInput
+import androidx.compose.ui.platform.LocalFocusManager
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import androidx.navigation.NavHostController
 import androidx.navigation.compose.rememberNavController
-import co.danjuma.ideaplayground.R
 import co.danjuma.ideaplayground.components.ButtonComponent
 import co.danjuma.ideaplayground.components.TextFieldComponent
 
 @Composable
 fun TipCalculatorScreen(navController: NavHostController) {
+    val focusManager = LocalFocusManager.current
     Box(
         modifier = Modifier
             .fillMaxSize()
@@ -35,30 +39,33 @@ fun TipCalculatorScreen(navController: NavHostController) {
         contentAlignment = Alignment.BottomCenter
     ) {
         Column(
+
             modifier = Modifier
-                .fillMaxSize()
+                .fillMaxSize().pointerInput(Unit) {
+                    detectTapGestures(onTap = {
+                        focusManager.clearFocus()
+                    })
+                }
         ) {
 
             Text(text = "Tip Calculator Screen", fontSize = 30.sp)
 
-            Spacer(modifier = Modifier.height(10.dp))
+            Spacer(modifier = Modifier.height(15.dp))
 
-            TextFieldComponent(value = "Test")
+            TextFieldComponent(value = "")
 
             Spacer(modifier = Modifier.height(15.dp))
 
 
         }
+        ButtonComponent(
 
-        Box(modifier = Modifier.fillMaxWidth(), contentAlignment = Alignment.BottomCenter) {
-            ButtonComponent(
+            value = "Go Back",
+            navController = navController, onClick = {
+                navController.navigate("MainActivityScreen")
+            }
+        )
 
-                value = stringResource(id = R.string.tip_calculator_screen),
-                navController = navController, onClick = {
-                    navController.navigate("NewScreen")
-                }
-            )
-        }
     }
 
 }
