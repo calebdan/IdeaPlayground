@@ -27,6 +27,7 @@ import androidx.navigation.NavHostController
 import androidx.navigation.compose.rememberNavController
 import co.danjuma.ideaplayground.components.ButtonComponent
 import co.danjuma.ideaplayground.components.TextFieldComponent
+import co.danjuma.ideaplayground.ui.theme.OffWhite
 
 @Composable
 fun TipCalculatorScreen(navController: NavHostController) {
@@ -34,14 +35,16 @@ fun TipCalculatorScreen(navController: NavHostController) {
     Box(
         modifier = Modifier
             .fillMaxSize()
-            .padding(30.dp)
-            .background(Color.White),
+            .padding(20.dp)
+            .background(OffWhite),
         contentAlignment = Alignment.BottomCenter
     ) {
         Column(
 
             modifier = Modifier
-                .fillMaxSize().pointerInput(Unit) {
+                .fillMaxSize()
+                .padding(20.dp)
+                .pointerInput(Unit) {
                     detectTapGestures(onTap = {
                         focusManager.clearFocus()
                     })
@@ -55,6 +58,17 @@ fun TipCalculatorScreen(navController: NavHostController) {
             TextFieldComponent(value = "")
 
             Spacer(modifier = Modifier.height(15.dp))
+
+
+            ButtonComponent(
+
+                value = "Calculate",
+                navController = navController,
+                onClick = {
+
+                },
+            )
+
 
 
         }
