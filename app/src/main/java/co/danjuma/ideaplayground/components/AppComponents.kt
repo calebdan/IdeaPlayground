@@ -1,6 +1,7 @@
 package co.danjuma.ideaplayground.components
 
 
+import android.sax.TextElementListener
 import androidx.compose.foundation.border
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.fillMaxSize
@@ -27,6 +28,7 @@ import androidx.compose.ui.input.key.KeyEventType
 import androidx.compose.ui.input.key.onKeyEvent
 import androidx.compose.ui.input.key.type
 import androidx.compose.ui.res.stringResource
+import androidx.compose.ui.text.font.FontStyle
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.input.KeyboardType
 import androidx.compose.ui.text.style.TextAlign
@@ -55,8 +57,10 @@ fun ButtonComponent(
                 1.dp, color = Color.Blue,
                 shape = RectangleShape
             )
-            .padding(horizontal = 5.dp, vertical = 2.dp)
-           ,
+            .padding(
+                horizontal = 5.dp,
+                vertical = 2.dp
+            ),
         shape = RoundedCornerShape(10),
 
         onClick = {
@@ -73,13 +77,16 @@ fun ButtonComponent(
 
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
-fun TextFieldComponent(value: String) {
+fun TextFieldComponent(value: String, onTextEntered: (String) -> Unit) {
     var textValue = remember { mutableStateOf(value) }
 
     TextField(
 
         value = textValue.value,
-        onValueChange = { textValue.value = it },
+        onValueChange = {
+            textValue.value = it
+            onTextEntered(it)
+        },
         maxLines = 1,
         singleLine = true,
 
@@ -99,7 +106,22 @@ fun TextFieldComponent(value: String) {
         keyboardOptions = KeyboardOptions(keyboardType = KeyboardType.Number),
         modifier = Modifier.fillMaxWidth()
     )
+}
 
+@Composable
+fun TextViewComponent(tcTextValue: String, onTextResult: (String) -> Unit) {
+
+    var textValue = remember { mutableStateOf(tcTextValue) }
+
+    Text(
+
+        text = textValue.value,
+        fontSize = 20.sp,
+        fontWeight = FontWeight.Normal,
+        fontStyle = FontStyle.Italic,
+        textAlign = TextAlign.Center,
+
+        )
 }
 
 
@@ -110,7 +132,7 @@ fun AppComponentPreview() {
 
     Column(modifier = Modifier.fillMaxSize()) {
 
-        TextFieldComponent("")
+        TextFieldComponent("", {})
 
         ButtonComponent(value = "test", navController, {})
     }

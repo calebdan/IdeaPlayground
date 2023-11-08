@@ -1,5 +1,6 @@
 package co.danjuma.ideaplayground.screens
 
+import android.widget.Toast
 import androidx.compose.foundation.background
 import androidx.compose.foundation.gestures.detectTapGestures
 import androidx.compose.foundation.layout.Box
@@ -14,24 +15,36 @@ import androidx.compose.material3.Surface
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.currentCompositionLocalContext
+import androidx.compose.runtime.mutableStateOf
+import androidx.compose.runtime.remember
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.input.pointer.pointerInput
+import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.platform.LocalFocusManager
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
+import androidx.lifecycle.viewmodel.compose.viewModel
 import androidx.navigation.NavHostController
 import androidx.navigation.compose.rememberNavController
 import co.danjuma.ideaplayground.components.ButtonComponent
 import co.danjuma.ideaplayground.components.TextFieldComponent
+import co.danjuma.ideaplayground.components.TextViewComponent
+import co.danjuma.ideaplayground.data.TipCalcActions
+import co.danjuma.ideaplayground.data.TipCalcState
+import co.danjuma.ideaplayground.data.TipCalculatorViewModel
 import co.danjuma.ideaplayground.ui.theme.OffWhite
 
 @Composable
 fun TipCalculatorScreen(navController: NavHostController) {
+
     val focusManager = LocalFocusManager.current
+
+    val tcViewModel: TipCalculatorViewModel = viewModel()
+
     Box(
         modifier = Modifier
             .fillMaxSize()
@@ -48,17 +61,25 @@ fun TipCalculatorScreen(navController: NavHostController) {
                     detectTapGestures(onTap = {
                         focusManager.clearFocus()
                     })
-                }
-        ) {
+                }) {
 
             Text(text = "Tip Calculator Screen", fontSize = 30.sp)
 
             Spacer(modifier = Modifier.height(15.dp))
 
-            TextFieldComponent(value = "")
+            TextFieldComponent("") {
+                tcViewModel.onAction(TipCalcActions.AmountEntered(it))
+            }
 
             Spacer(modifier = Modifier.height(15.dp))
 
+
+
+            TextViewComponent("") { it ->
+
+            }
+
+            Spacer(modifier = Modifier.height(25.dp))
 
             ButtonComponent(
 
@@ -66,19 +87,18 @@ fun TipCalculatorScreen(navController: NavHostController) {
                 navController = navController,
                 onClick = {
 
+                    tcViewModel.onAction(TipCalcActions.TCButtonClicked)
+
                 },
             )
-
 
 
         }
         ButtonComponent(
 
-            value = "Go Back",
-            navController = navController, onClick = {
+            value = "Go Back", navController = navController, onClick = {
                 navController.navigate("MainActivityScreen")
-            }
-        )
+            })
 
     }
 
@@ -87,6 +107,5 @@ fun TipCalculatorScreen(navController: NavHostController) {
 @Preview
 @Composable
 fun TipCalcPreview() {
-    val navController = rememberNavController()
-    TipCalculatorScreen(navController = navController)
+
 }
