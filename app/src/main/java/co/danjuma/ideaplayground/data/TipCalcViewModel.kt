@@ -1,14 +1,19 @@
 package co.danjuma.ideaplayground.data
 
+import android.app.Application
 import android.content.Context
 import android.util.Log
 import android.widget.Toast
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.mutableStateOf
+import androidx.compose.ui.platform.LocalContext
 
 
 import androidx.lifecycle.ViewModel
+import co.danjuma.ideaplayground.components.ShowToast
 import co.danjuma.ideaplayground.components.TextViewComponent
+import co.danjuma.ideaplayground.screens.TipCalculatorScreen
+import java.lang.NumberFormatException
 
 
 class TipCalculatorViewModel : ViewModel() {
@@ -27,22 +32,26 @@ class TipCalculatorViewModel : ViewModel() {
 
             is TipCalcActions.TCButtonClicked -> {
 
-                val tipPercentage = tipCalcState.value.tipPercentage
+                try {
+                    val tipPercentage = tipCalcState.value.tipPercentage
 
-                val billAmount = tipCalcState.value.tpValue.toInt()
+                    val billAmount = tipCalcState.value.tpValue.toInt()
 
+                    val calcResult = billAmount * tipPercentage / 100
 
+                    val tipResult = calcResult.toString()
 
+                    Log.d("TipCalcViewModelResult", tipResult)
 
-                val calcResult = billAmount * tipPercentage / 100
+                    tipCalcState.value = tipCalcState.value.copy(
 
-                val tipResult = calcResult.toString()
+                        tipResult = tipResult
+                    )
+                } catch (e: NumberFormatException) {
 
-                Log.d("TipCalcViewModelResult", tipResult)
+                    // Toast.makeText(, "Provide a value",Toast.LENGTH_SHORT).show()
 
-                tipCalcState.value = tipCalcState.value.copy(
-                    tipResult = tipResult
-                )
+                }
 
 
             }
@@ -50,5 +59,8 @@ class TipCalculatorViewModel : ViewModel() {
         }
 
     }
+
+    val tipResult: String
+        get() = tipCalcState.value.tipResult
 
 }

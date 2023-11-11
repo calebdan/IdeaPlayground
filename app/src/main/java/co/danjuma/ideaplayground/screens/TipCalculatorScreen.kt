@@ -1,5 +1,7 @@
 package co.danjuma.ideaplayground.screens
 
+import android.content.Context
+import android.util.Log
 import android.widget.Toast
 import androidx.compose.foundation.background
 import androidx.compose.foundation.gestures.detectTapGestures
@@ -75,9 +77,9 @@ fun TipCalculatorScreen(navController: NavHostController) {
 
 
 
-            TextViewComponent("") { it ->
+            TextViewComponent(tcViewModel.tipResult)
 
-            }
+            Log.d("TipCalculatorScreen-Home", tcViewModel.tipResult)
 
             Spacer(modifier = Modifier.height(25.dp))
 

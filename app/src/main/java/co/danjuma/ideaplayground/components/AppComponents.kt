@@ -2,6 +2,7 @@ package co.danjuma.ideaplayground.components
 
 
 import android.sax.TextElementListener
+import android.widget.Toast
 import androidx.compose.foundation.border
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.fillMaxSize
@@ -27,6 +28,7 @@ import androidx.compose.ui.graphics.RectangleShape
 import androidx.compose.ui.input.key.KeyEventType
 import androidx.compose.ui.input.key.onKeyEvent
 import androidx.compose.ui.input.key.type
+import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.font.FontStyle
 import androidx.compose.ui.text.font.FontWeight
@@ -109,13 +111,18 @@ fun TextFieldComponent(value: String, onTextEntered: (String) -> Unit) {
 }
 
 @Composable
-fun TextViewComponent(tcTextValue: String, onTextResult: (String) -> Unit) {
+fun ShowToast() {
+    Toast.makeText(LocalContext.current, "Provide a value", Toast.LENGTH_SHORT).show()
+}
+
+@Composable
+fun TextViewComponent(tcTextValue: String) {
 
     var textValue = remember { mutableStateOf(tcTextValue) }
 
     Text(
 
-        text = textValue.value,
+        text = tcTextValue,
         fontSize = 20.sp,
         fontWeight = FontWeight.Normal,
         fontStyle = FontStyle.Italic,
