@@ -15,6 +15,9 @@ import androidx.compose.foundation.text.KeyboardOptions
 import androidx.compose.material3.Button
 import androidx.compose.material3.ButtonColors
 import androidx.compose.material3.ButtonDefaults
+import androidx.compose.material3.Card
+import androidx.compose.material3.CardDefaults
+import androidx.compose.material3.CardElevation
 import androidx.compose.material3.ExperimentalMaterial3Api
 import androidx.compose.material3.Text
 import androidx.compose.material3.TextField
@@ -110,6 +113,8 @@ fun TextFieldComponent(value: String, onTextEntered: (String) -> Unit) {
     )
 }
 
+
+
 @Composable
 fun ShowToast() {
     Toast.makeText(LocalContext.current, "Provide a value", Toast.LENGTH_SHORT).show()
@@ -118,7 +123,6 @@ fun ShowToast() {
 @Composable
 fun TextViewComponent(tcTextValue: String) {
 
-    var textValue = remember { mutableStateOf(tcTextValue) }
 
     Text(
 
@@ -127,7 +131,6 @@ fun TextViewComponent(tcTextValue: String) {
         fontWeight = FontWeight.Normal,
         fontStyle = FontStyle.Italic,
         textAlign = TextAlign.Center,
-
         )
 }
 
@@ -141,7 +144,7 @@ fun AppComponentPreview() {
 
         TextFieldComponent("", {})
 
-        ButtonComponent(value = "test", navController, {})
+        ButtonComponent(value = "", navController, {})
     }
 
 
